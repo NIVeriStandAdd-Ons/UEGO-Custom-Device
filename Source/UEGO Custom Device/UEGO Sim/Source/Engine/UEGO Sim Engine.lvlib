@@ -4,8 +4,14 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">335577088</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Item Name="Engine" Type="Folder">
-		<Item Name="Init" Type="Folder"/>
-		<Item Name="Run" Type="Folder"/>
+		<Item Name="Init" Type="Folder">
+			<Item Name="get item properties.vi" Type="VI" URL="../get item properties.vi"/>
+		</Item>
+		<Item Name="Run" Type="Folder">
+			<Item Name="my own integrator.vi" Type="VI" URL="../my own integrator.vi"/>
+			<Item Name="Nernst T to R.vi" Type="VI" URL="../Nernst T to R.vi"/>
+			<Item Name="point thermal model 2.vi" Type="VI" URL="../point thermal model 2.vi"/>
+		</Item>
 		<Item Name="Shut Down" Type="Folder"/>
 	</Item>
 	<Item Name="Types" Type="Folder"/>
