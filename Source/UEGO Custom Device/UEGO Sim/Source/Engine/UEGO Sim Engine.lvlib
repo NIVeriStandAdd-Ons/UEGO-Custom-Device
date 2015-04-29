@@ -6,6 +6,7 @@
 	<Item Name="Engine" Type="Folder">
 		<Item Name="Init" Type="Folder">
 			<Item Name="get item properties.vi" Type="VI" URL="../get item properties.vi"/>
+			<Item Name="open fpga refs.vi" Type="VI" URL="../open fpga refs.vi"/>
 		</Item>
 		<Item Name="Run" Type="Folder">
 			<Item Name="my own integrator.vi" Type="VI" URL="../my own integrator.vi"/>

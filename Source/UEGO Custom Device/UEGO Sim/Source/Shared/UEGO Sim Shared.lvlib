@@ -6,6 +6,10 @@
 	<Item Name="Shared" Type="Folder">
 		<Item Name="Types" Type="Folder">
 			<Item Name="sensor models" Type="VI" URL="../sensor models"/>
+			<Item Name="UEGO fpga inputs.ctl" Type="VI" URL="../UEGO fpga inputs.ctl"/>
+			<Item Name="UEGO fpga outputs.ctl" Type="VI" URL="../UEGO fpga outputs.ctl"/>
+			<Item Name="VS input channels.ctl" Type="VI" URL="../VS input channels.ctl"/>
+			<Item Name="VS output channels.ctl" Type="VI" URL="../VS output channels.ctl"/>
 		</Item>
 		<Item Name="Constants.vi" Type="VI" URL="../Constants.vi"/>
 	</Item>
