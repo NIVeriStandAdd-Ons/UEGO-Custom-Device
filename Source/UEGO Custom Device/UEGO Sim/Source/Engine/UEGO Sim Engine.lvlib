@@ -9,12 +9,19 @@
 			<Item Name="open fpga refs.vi" Type="VI" URL="../open fpga refs.vi"/>
 		</Item>
 		<Item Name="Run" Type="Folder">
+			<Item Name="bosch 4-2 Nernst T to R.vi" Type="VI" URL="../bosch 4-2 Nernst T to R.vi"/>
+			<Item Name="bosch 4-2 point thermal model.vi" Type="VI" URL="../bosch 4-2 point thermal model.vi"/>
+			<Item Name="map inputs.vi" Type="VI" URL="../map inputs.vi"/>
 			<Item Name="my own integrator.vi" Type="VI" URL="../my own integrator.vi"/>
-			<Item Name="Nernst T to R.vi" Type="VI" URL="../Nernst T to R.vi"/>
-			<Item Name="point thermal model 2.vi" Type="VI" URL="../point thermal model 2.vi"/>
+			<Item Name="Read VS input FIFO.vi" Type="VI" URL="../Read VS input FIFO.vi"/>
+			<Item Name="Read Write FPGA channels.vi" Type="VI" URL="../Read Write FPGA channels.vi"/>
+			<Item Name="Run Thermal Models.vi" Type="VI" URL="../Run Thermal Models.vi"/>
+			<Item Name="Write VS output FIFO.vi" Type="VI" URL="../Write VS output FIFO.vi"/>
 		</Item>
 		<Item Name="Shut Down" Type="Folder"/>
 	</Item>
-	<Item Name="Types" Type="Folder"/>
+	<Item Name="Types" Type="Folder">
+		<Item Name="UEGO CD state.ctl" Type="VI" URL="../UEGO CD state.ctl"/>
+	</Item>
 	<Item Name="RT Driver VI.vi" Type="VI" URL="../RT Driver VI.vi"/>
 </Library>

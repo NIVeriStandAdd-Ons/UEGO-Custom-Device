@@ -17,7 +17,6 @@
 		<Item Name="Utility" Type="Folder">
 			<Item Name="Copy .LLB to NI VeriStand dir.vi" Type="VI" URL="../Utility/Copy .LLB to NI VeriStand dir.vi"/>
 		</Item>
-		<Item Name="channel separator.vi" Type="VI" URL="../Engine/channel separator.vi"/>
 		<Item Name="Custom Device UEGO Sim.xml" Type="Document" URL="../Custom Device UEGO Sim.xml"/>
 		<Item Name="Example FPGA target" Type="FPGA Target">
 			<Property Name="AutoRun" Type="Bool">false</Property>
