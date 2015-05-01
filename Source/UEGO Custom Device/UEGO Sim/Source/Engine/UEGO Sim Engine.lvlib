@@ -11,6 +11,7 @@
 		<Item Name="Run" Type="Folder">
 			<Item Name="bosch 4-2 Nernst T to R.vi" Type="VI" URL="../bosch 4-2 Nernst T to R.vi"/>
 			<Item Name="bosch 4-2 point thermal model.vi" Type="VI" URL="../bosch 4-2 point thermal model.vi"/>
+			<Item Name="bosch 4-9 Nernst T to R.vi" Type="VI" URL="../bosch 4-9 Nernst T to R.vi"/>
 			<Item Name="map inputs.vi" Type="VI" URL="../map inputs.vi"/>
 			<Item Name="my own integrator.vi" Type="VI" URL="../my own integrator.vi"/>
 			<Item Name="Read VS input FIFO.vi" Type="VI" URL="../Read VS input FIFO.vi"/>

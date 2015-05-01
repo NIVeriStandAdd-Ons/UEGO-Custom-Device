@@ -913,9 +913,11 @@
 				</Item>
 			</Item>
 		</Item>
+		<Item Name="t to r.vi" Type="VI" URL="../../../../../../../Desktop/t to r.vi"/>
 		<Item Name="UEGO Sim Engine.lvlib" Type="Library" URL="../Engine/UEGO Sim Engine.lvlib"/>
 		<Item Name="UEGO Sim Shared.lvlib" Type="Library" URL="../Shared/UEGO Sim Shared.lvlib"/>
 		<Item Name="UEGO Sim System Explorer.lvlib" Type="Library" URL="../System Explorer/UEGO Sim System Explorer.lvlib"/>
+		<Item Name="Untitled 1 (SubVI).vi" Type="VI" URL="../../../../../../../Desktop/Untitled 1 (SubVI).vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
