@@ -4,6 +4,9 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">335577088</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Item Name="Engine" Type="Folder">
+		<Item Name="debug" Type="Folder">
+			<Item Name="Test logger.vi" Type="VI" URL="../Test logger.vi"/>
+		</Item>
 		<Item Name="Init" Type="Folder">
 			<Item Name="get item properties.vi" Type="VI" URL="../get item properties.vi"/>
 			<Item Name="open fpga refs.vi" Type="VI" URL="../open fpga refs.vi"/>
