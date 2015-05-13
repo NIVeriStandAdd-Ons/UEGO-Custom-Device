@@ -14,6 +14,9 @@
 			<Item Name="Custom Device API.lvlib" Type="Library" URL="/&lt;vilib&gt;/NI Veristand/Custom Device API/Custom Device API.lvlib"/>
 			<Item Name="Custom Device Utility Library.lvlib" Type="Library" URL="/&lt;vilib&gt;/NI Veristand/Custom Device Tools/Custom Device Utility Library/Custom Device Utility Library.lvlib"/>
 		</Item>
+		<Item Name="tests" Type="Folder">
+			<Item Name="workspace reader.vi" Type="VI" URL="../Engine/workspace reader.vi"/>
+		</Item>
 		<Item Name="Utility" Type="Folder">
 			<Item Name="Copy .LLB to NI VeriStand dir.vi" Type="VI" URL="../Utility/Copy .LLB to NI VeriStand dir.vi"/>
 		</Item>
@@ -868,8 +871,6 @@
 					<Item Name="niFPGA I32xI32 MAC - FXP.vi" Type="VI" URL="/&lt;vilib&gt;/rvi/Analysis/utilities/niFPGA I32xI32 MAC - FXP.vi"/>
 					<Item Name="lvSimController.dll" Type="Document" URL="/&lt;vilib&gt;/rvi/Simulation/lvSimController.dll"/>
 				</Item>
-				<Item Name="UEGO Sim Shared.lvlib" Type="Library" URL="../Shared/UEGO Sim Shared.lvlib"/>
-				<Item Name="O2 Sensor Simulation.vi" Type="VI" URL="../Engine/FPGA/O2 Sensor Simulation.vi"/>
 			</Item>
 			<Item Name="Build Specifications" Type="Build">
 				<Item Name="UEGO sim component" Type="{F4C5E96F-7410-48A5-BB87-3559BC9B167F}">
@@ -944,9 +945,11 @@
 				<Item Name="MD5Checksum File.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/MD5Checksum.llb/MD5Checksum File.vi"/>
 				<Item Name="MD5Checksum format message-digest.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/MD5Checksum.llb/MD5Checksum format message-digest.vi"/>
 				<Item Name="MD5Checksum pad.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/MD5Checksum.llb/MD5Checksum pad.vi"/>
+				<Item Name="MergeError.vi" Type="VI" URL="/&lt;vilib&gt;/NI Veristand/Execution/Shared/MergeError.vi"/>
 				<Item Name="NI_FileType.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/lvfile.llb/NI_FileType.lvlib"/>
 				<Item Name="NI_FTP.lvlib" Type="Library" URL="/&lt;vilib&gt;/FTP/NI_FTP.lvlib"/>
 				<Item Name="NI_PackedLibraryUtility.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/LVLibp/NI_PackedLibraryUtility.lvlib"/>
+				<Item Name="NI_VS Workspace ExecutionAPI.lvlib" Type="Library" URL="/&lt;vilib&gt;/NI Veristand/Execution/Workspace/NI_VS Workspace ExecutionAPI.lvlib"/>
 				<Item Name="NIVeriStand_DataServices.dll" Type="Document" URL="/&lt;vilib&gt;/NI VeriStand/Custom Device API/data/NIVeriStand_DataServices.dll"/>
 				<Item Name="Not Found Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Not Found Dialog.vi"/>
 				<Item Name="Search and Replace Pattern.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Search and Replace Pattern.vi"/>
@@ -958,7 +961,14 @@
 				<Item Name="Three Button Dialog CORE.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Three Button Dialog CORE.vi"/>
 				<Item Name="Three Button Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Three Button Dialog.vi"/>
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
+				<Item Name="UnpackedFlatVectorToMatrix.vi" Type="VI" URL="/&lt;vilib&gt;/NI Veristand/Execution/Shared/UnpackedFlatVectorToMatrix.vi"/>
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
+			</Item>
+			<Item Name="NationalInstruments.VeriStand" Type="Document" URL="NationalInstruments.VeriStand">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="NationalInstruments.VeriStand.ClientAPI" Type="Document" URL="NationalInstruments.VeriStand.ClientAPI">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="NationalInstruments.VeriStand.SystemStorage" Type="Document" URL="NationalInstruments.VeriStand.SystemStorage">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
@@ -1178,7 +1188,7 @@
 	</Item>
 	<Item Name="RT PXI Target" Type="RT PXI Chassis">
 		<Property Name="alias.name" Type="Str">RT PXI Target</Property>
-		<Property Name="alias.value" Type="Str">10.0.18.203</Property>
+		<Property Name="alias.value" Type="Str">NI-PXIe8135-2F14D9FD</Property>
 		<Property Name="CCSymbols" Type="Str">TARGET_TYPE,RT;OS,PharLap;CPU,x86;</Property>
 		<Property Name="host.ResponsivenessCheckEnabled" Type="Bool">true</Property>
 		<Property Name="host.ResponsivenessCheckPingDelay" Type="UInt">5000</Property>
@@ -1215,6 +1225,34 @@
 		<Property Name="target.server.vi.access" Type="Str">+*</Property>
 		<Property Name="target.server.vi.callsEnabled" Type="Bool">true</Property>
 		<Property Name="target.server.vi.propertiesEnabled" Type="Bool">true</Property>
+		<Property Name="target.WebServer.Config" Type="Str">Listen 8000
+
+NI.ServerName default
+DocumentRoot "$LVSERVER_DOCROOT"
+TypesConfig "$LVSERVER_CONFIGROOT/mime.types"
+DirectoryIndex index.htm
+WorkerLimit 10
+InactivityTimeout 60
+
+LoadModulePath "$LVSERVER_MODULEPATHS"
+LoadModule LVAuth lvauthmodule
+LoadModule LVRFP lvrfpmodule
+
+#
+# Pipeline Definition
+#
+
+SetConnector netConnector
+
+AddHandler LVAuth
+AddHandler LVRFP
+
+AddHandler fileHandler ""
+
+AddOutputFilter chunkFilter
+
+
+</Property>
 		<Property Name="target.WebServer.Enabled" Type="Bool">false</Property>
 		<Property Name="target.WebServer.LogEnabled" Type="Bool">false</Property>
 		<Property Name="target.WebServer.LogPath" Type="Path">/c/ni-rt/system/www/www.log</Property>
@@ -1228,6 +1266,10 @@
 		<Item Name="NI VeriStand APIs" Type="Folder">
 			<Item Name="Custom Device API.lvlib" Type="Library" URL="/&lt;vilib&gt;/NI Veristand/Custom Device API/Custom Device API.lvlib"/>
 			<Item Name="Custom Device Utility Library.lvlib" Type="Library" URL="/&lt;vilib&gt;/NI Veristand/Custom Device Tools/Custom Device Utility Library/Custom Device Utility Library.lvlib"/>
+		</Item>
+		<Item Name="Test" Type="Folder">
+			<Item Name="FPGA tester.vi" Type="VI" URL="../Engine/FPGA tester.vi"/>
+			<Item Name="Mock VS engine.vi" Type="VI" URL="../Engine/Mock VS engine.vi"/>
 		</Item>
 		<Item Name="FPGA Target" Type="FPGA Target">
 			<Property Name="AutoRun" Type="Bool">false</Property>
@@ -1900,6 +1942,9 @@
 					<Item Name="niFPGA BW CU Order 2 (32-bit).vi" Type="VI" URL="/&lt;vilib&gt;/rvi/Analysis/measure/butterworth/templates/niFPGA BW CU Order 2 (32-bit).vi"/>
 					<Item Name="niFPGA I32xI32 MAC - FXP.vi" Type="VI" URL="/&lt;vilib&gt;/rvi/Analysis/utilities/niFPGA I32xI32 MAC - FXP.vi"/>
 				</Item>
+				<Item Name="O2 Sensor Simulation.vi" Type="VI" URL="../Engine/FPGA/O2 Sensor Simulation.vi"/>
+				<Item Name="UEGO sim component.vi" Type="VI" URL="../Engine/FPGA/UEGO sim component.vi"/>
+				<Item Name="UEGO Sim Shared.lvlib" Type="Library" URL="../Shared/UEGO Sim Shared.lvlib"/>
 			</Item>
 			<Item Name="Build Specifications" Type="Build">
 				<Item Name="example fpga code" Type="{F4C5E96F-7410-48A5-BB87-3559BC9B167F}">
@@ -1945,11 +1990,100 @@
 		<Item Name="UEGO Sim Engine.lvlib" Type="Library" URL="../Engine/UEGO Sim Engine.lvlib"/>
 		<Item Name="UEGO Sim Shared.lvlib" Type="Library" URL="../Shared/UEGO Sim Shared.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
+			<Item Name="instr.lib" Type="Folder">
+				<Item Name="ni272x Address Bank Relays.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Address Bank Relays.vi"/>
+				<Item Name="ni272x Attribute ID Bank U8.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Attribute ID Bank U8.ctl"/>
+				<Item Name="ni272x Attribute ID Channel Single.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Attribute ID Channel Single.ctl"/>
+				<Item Name="ni272x Attribute ID Channel Single[].ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Attribute ID Channel Single[].ctl"/>
+				<Item Name="ni272x Attribute ID Channel String[].ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Attribute ID Channel String[].ctl"/>
+				<Item Name="ni272x Attribute ID Device Boolean.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Attribute ID Device Boolean.ctl"/>
+				<Item Name="ni272x Attribute ID Device String.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Attribute ID Device String.ctl"/>
+				<Item Name="ni272x Attribute ID Device String[].ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Attribute ID Device String[].ctl"/>
+				<Item Name="ni272x Attribute ID Device U8.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Attribute ID Device U8.ctl"/>
+				<Item Name="ni272x Bank Connection Status.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Bank Connection Status.ctl"/>
+				<Item Name="ni272x Calculate Relays to Close.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Calculate Relays to Close.vi"/>
+				<Item Name="ni272x Callendar-Van Dusen RTD Parameters.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Callendar-Van Dusen RTD Parameters.ctl"/>
+				<Item Name="ni272x Close Session.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Close Session.vi"/>
+				<Item Name="ni272x Connect (Poly).vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Connect (Poly).vi"/>
+				<Item Name="ni272x Connect 2Bank.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Connect 2Bank.vi"/>
+				<Item Name="ni272x Connect 2Chan.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Connect 2Chan.vi"/>
+				<Item Name="ni272x Connect to Connector 1Chan.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Connect to Connector 1Chan.vi"/>
+				<Item Name="ni272x Connector Identifier.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Connector Identifier.ctl"/>
+				<Item Name="ni272x Error Check (Poly).vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check (Poly).vi"/>
+				<Item Name="ni272x Error Check Bank Connectivity.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Bank Connectivity.vi"/>
+				<Item Name="ni272x Error Check Bank Number.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Bank Number.vi"/>
+				<Item Name="ni272x Error Check Bank Status for Connect.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Bank Status for Connect.vi"/>
+				<Item Name="ni272x Error Check Bank Status for Disconnect.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Bank Status for Disconnect.vi"/>
+				<Item Name="ni272x Error Check Channel Connectivity.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Channel Connectivity.vi"/>
+				<Item Name="ni272x Error Check Channel For Connect.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Channel For Connect.vi"/>
+				<Item Name="ni272x Error Check Channel For Disconnect.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Channel For Disconnect.vi"/>
+				<Item Name="ni272x Error Check Channel Number.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Channel Number.vi"/>
+				<Item Name="ni272x Error Check Configuration Data Consistency.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Configuration Data Consistency.vi"/>
+				<Item Name="ni272x Error Check Device for Exclusive DMM Connect.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Device for Exclusive DMM Connect.vi"/>
+				<Item Name="ni272x Error Check Initialized.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Initialized.vi"/>
+				<Item Name="ni272x Error Check Product ID.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Product ID.vi"/>
+				<Item Name="ni272x Error Check Resistance for Channel.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Resistance for Channel.vi"/>
+				<Item Name="ni272x Error Check Resistance Value Ranges.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Check Resistance Value Ranges.vi"/>
+				<Item Name="ni272x Error Code Offsets.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Code Offsets.ctl"/>
+				<Item Name="ni272x Error Map Enum to Code.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Error Map Enum to Code.vi"/>
+				<Item Name="ni272x Generate Error.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Generate Error.vi"/>
+				<Item Name="ni272x Generate Warning.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Generate Warning.vi"/>
+				<Item Name="ni272x Get Attribute (Poly).vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Get Attribute (Poly).vi"/>
+				<Item Name="ni272x Get Attribute Bank U8.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Get Attribute Bank U8.vi"/>
+				<Item Name="ni272x Get Attribute Channel Single.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Get Attribute Channel Single.vi"/>
+				<Item Name="ni272x Get Attribute Channel Single[].vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Get Attribute Channel Single[].vi"/>
+				<Item Name="ni272x Get Attribute Channel String[].vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Get Attribute Channel String[].vi"/>
+				<Item Name="ni272x Get Attribute Device Boolean.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Get Attribute Device Boolean.vi"/>
+				<Item Name="ni272x Get Attribute Device String.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Get Attribute Device String.vi"/>
+				<Item Name="ni272x Get Attribute Device String[].vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Get Attribute Device String[].vi"/>
+				<Item Name="ni272x Get Attribute Device U8.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Get Attribute Device U8.vi"/>
+				<Item Name="ni272x Get Default Configuration Data.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Get Default Configuration Data.vi"/>
+				<Item Name="ni272x Initialize Session with Configuration.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Initialize Session with Configuration.vi"/>
+				<Item Name="ni272x Initialize Session.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Initialize Session.vi"/>
+				<Item Name="ni272x Parse (Poly).vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Parse (Poly).vi"/>
+				<Item Name="ni272x Parse Bank String.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Parse Bank String.vi"/>
+				<Item Name="ni272x Parse Channel String.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Parse Channel String.vi"/>
+				<Item Name="ni272x Reference.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Reference.ctl"/>
+				<Item Name="ni272x Refnum Add Session.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Refnum Add Session.vi"/>
+				<Item Name="ni272x Refnum Get Lock.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Refnum Get Lock.vi"/>
+				<Item Name="ni272x Refnum Release Lock.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Refnum Release Lock.vi"/>
+				<Item Name="ni272x Refnum Session Manager Action.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Refnum Session Manager Action.ctl"/>
+				<Item Name="ni272x Refnum Session Manager.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Refnum Session Manager.vi"/>
+				<Item Name="ni272x Relay Control (Poly).vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Relay Control (Poly).vi"/>
+				<Item Name="ni272x Relay Control Action.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Relay Control Action.ctl"/>
+				<Item Name="ni272x Relay Control Multiple.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Relay Control Multiple.vi"/>
+				<Item Name="ni272x Relay Control Single.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Relay Control Single.vi"/>
+				<Item Name="ni272x Resistance Storage Format.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Resistance Storage Format.ctl"/>
+				<Item Name="ni272x Resistance to Temperature.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Resistance to Temperature.vi"/>
+				<Item Name="ni272x Session Data.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Session Data.ctl"/>
+				<Item Name="ni272x Set Attribute (Poly).vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Set Attribute (Poly).vi"/>
+				<Item Name="ni272x Set Attribute Bank U8.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Set Attribute Bank U8.vi"/>
+				<Item Name="ni272x Set Attribute Channel Single.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Set Attribute Channel Single.vi"/>
+				<Item Name="ni272x Set Attribute Device Boolean.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Set Attribute Device Boolean.vi"/>
+				<Item Name="ni272x Set Attribute Device String.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Set Attribute Device String.vi"/>
+				<Item Name="ni272x Set Channel Connection Status.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Set Channel Connection Status.vi"/>
+				<Item Name="ni272x Temperature to Resistance.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Temperature to Resistance.vi"/>
+				<Item Name="ni272x Transform from Configuration to Session Data.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Transform from Configuration to Session Data.vi"/>
+				<Item Name="ni272x Wait For Settling.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Wait For Settling.vi"/>
+				<Item Name="ni272x Warning Code Offsets.ctl" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Warning Code Offsets.ctl"/>
+				<Item Name="ni272x Warning Map Enum to Code.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Warning Map Enum to Code.vi"/>
+				<Item Name="ni272x Write (Poly).vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Write (Poly).vi"/>
+				<Item Name="ni272x Write Potentiometer 2Chan 1Samp.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Write Potentiometer 2Chan 1Samp.vi"/>
+				<Item Name="ni272x Write Resistance 1Chan 1Samp.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Write Resistance 1Chan 1Samp.vi"/>
+				<Item Name="ni272x Write Temperature 1Chan 1Samp.vi" Type="VI" URL="/&lt;instrlib&gt;/ni272xReferenceVIs/ni272xReferenceVIs.llb/ni272x Write Temperature 1Chan 1Samp.vi"/>
+			</Item>
 			<Item Name="vi.lib" Type="Folder">
+				<Item Name="Acquire Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Acquire Semaphore.vi"/>
+				<Item Name="AddNamedSemaphorePrefix.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/AddNamedSemaphorePrefix.vi"/>
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
 				<Item Name="Check Special Tags.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Check Special Tags.vi"/>
 				<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
 				<Item Name="Convert property node font to graphics font.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Convert property node font to graphics font.vi"/>
+				<Item Name="DAQmx Fill In Error Info.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/miscellaneous.llb/DAQmx Fill In Error Info.vi"/>
+				<Item Name="DAQmx Reset Device.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/system.llb/DAQmx Reset Device.vi"/>
+				<Item Name="DAQmx Switch Close Relays.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/hardwareSpecific/Switch.llb/DAQmx Switch Close Relays.vi"/>
+				<Item Name="DAQmx Switch Open Relays.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/hardwareSpecific/Switch.llb/DAQmx Switch Open Relays.vi"/>
+				<Item Name="DAQmx Switch Wait for Settling.vi" Type="VI" URL="/&lt;vilib&gt;/DAQmx/configure/hardwareSpecific/Switch.llb/DAQmx Switch Wait for Settling.vi"/>
 				<Item Name="Details Display Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Details Display Dialog.vi"/>
 				<Item Name="DialogType.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/DialogType.ctl"/>
 				<Item Name="DialogTypeEnum.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/DialogTypeEnum.ctl"/>
@@ -1964,6 +2098,7 @@
 				<Item Name="Get String Text Bounds.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Get String Text Bounds.vi"/>
 				<Item Name="Get Text Rect.vi" Type="VI" URL="/&lt;vilib&gt;/picture/picture.llb/Get Text Rect.vi"/>
 				<Item Name="GetHelpDir.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/GetHelpDir.vi"/>
+				<Item Name="GetNamedSemaphorePrefix.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/GetNamedSemaphorePrefix.vi"/>
 				<Item Name="GetRTHostConnectedProp.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/GetRTHostConnectedProp.vi"/>
 				<Item Name="Longest Line Length in Pixels.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Longest Line Length in Pixels.vi"/>
 				<Item Name="LVBoundsTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVBoundsTypeDef.ctl"/>
@@ -1971,8 +2106,15 @@
 				<Item Name="LVRectTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVRectTypeDef.ctl"/>
 				<Item Name="NI_FTP.lvlib" Type="Library" URL="/&lt;vilib&gt;/FTP/NI_FTP.lvlib"/>
 				<Item Name="NIVeriStand_DataServices.dll" Type="Document" URL="/&lt;vilib&gt;/NI VeriStand/Custom Device API/data/NIVeriStand_DataServices.dll"/>
+				<Item Name="Not A Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Not A Semaphore.vi"/>
 				<Item Name="Not Found Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Not Found Dialog.vi"/>
+				<Item Name="Obtain Semaphore Reference.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Obtain Semaphore Reference.vi"/>
+				<Item Name="Release Semaphore Reference.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Release Semaphore Reference.vi"/>
+				<Item Name="Release Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Release Semaphore.vi"/>
+				<Item Name="RemoveNamedSemaphorePrefix.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/RemoveNamedSemaphorePrefix.vi"/>
 				<Item Name="Search and Replace Pattern.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Search and Replace Pattern.vi"/>
+				<Item Name="Semaphore RefNum" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Semaphore RefNum"/>
+				<Item Name="Semaphore Refnum Core.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Semaphore Refnum Core.ctl"/>
 				<Item Name="Set Bold Text.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set Bold Text.vi"/>
 				<Item Name="Set String Value.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set String Value.vi"/>
 				<Item Name="Simple Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Simple Error Handler.vi"/>
@@ -1980,12 +2122,16 @@
 				<Item Name="Three Button Dialog CORE.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Three Button Dialog CORE.vi"/>
 				<Item Name="Three Button Dialog.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Three Button Dialog.vi"/>
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
+				<Item Name="Validate Semaphore Size.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Validate Semaphore Size.vi"/>
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
 			</Item>
 			<Item Name="NationalInstruments.VeriStand.SystemStorage" Type="Document" URL="NationalInstruments.VeriStand.SystemStorage">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="NiFpgaLv.dll" Type="Document" URL="NiFpgaLv.dll">
+				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
+			</Item>
+			<Item Name="nilvaiu.dll" Type="Document" URL="nilvaiu.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 		</Item>
