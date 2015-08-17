@@ -1944,9 +1944,6 @@ AddOutputFilter chunkFilter
 					<Item Name="niFPGA BW CU Order 2 (32-bit).vi" Type="VI" URL="/&lt;vilib&gt;/rvi/Analysis/measure/butterworth/templates/niFPGA BW CU Order 2 (32-bit).vi"/>
 					<Item Name="niFPGA I32xI32 MAC - FXP.vi" Type="VI" URL="/&lt;vilib&gt;/rvi/Analysis/utilities/niFPGA I32xI32 MAC - FXP.vi"/>
 				</Item>
-				<Item Name="O2 Sensor Simulation.vi" Type="VI" URL="../Engine/FPGA/O2 Sensor Simulation.vi"/>
-				<Item Name="UEGO sim component.vi" Type="VI" URL="../Engine/FPGA/UEGO sim component.vi"/>
-				<Item Name="UEGO Sim Shared.lvlib" Type="Library" URL="../Shared/UEGO Sim Shared.lvlib"/>
 			</Item>
 			<Item Name="Build Specifications" Type="Build">
 				<Item Name="example fpga code" Type="{F4C5E96F-7410-48A5-BB87-3559BC9B167F}">
@@ -1989,6 +1986,7 @@ AddOutputFilter chunkFilter
 				</Item>
 			</Item>
 		</Item>
+		<Item Name="RT Cal procedure.vi" Type="VI" URL="../Engine/RT Cal procedure.vi"/>
 		<Item Name="UEGO Sim Engine.lvlib" Type="Library" URL="../Engine/UEGO Sim Engine.lvlib"/>
 		<Item Name="UEGO Sim Shared.lvlib" Type="Library" URL="../Shared/UEGO Sim Shared.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
@@ -2106,6 +2104,7 @@ AddOutputFilter chunkFilter
 				<Item Name="LVBoundsTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVBoundsTypeDef.ctl"/>
 				<Item Name="LVFPGAAdvSessionResources.lvlib" Type="Library" URL="/&lt;vilib&gt;/NI/LVFPGA Adv Session Resources/LVFPGAAdvSessionResources.lvlib"/>
 				<Item Name="LVRectTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVRectTypeDef.ctl"/>
+				<Item Name="NI_AALBase.lvlib" Type="Library" URL="/&lt;vilib&gt;/Analysis/NI_AALBase.lvlib"/>
 				<Item Name="NI_FTP.lvlib" Type="Library" URL="/&lt;vilib&gt;/FTP/NI_FTP.lvlib"/>
 				<Item Name="NIVeriStand_DataServices.dll" Type="Document" URL="/&lt;vilib&gt;/NI VeriStand/Custom Device API/data/NIVeriStand_DataServices.dll"/>
 				<Item Name="Not A Semaphore.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Not A Semaphore.vi"/>
@@ -2127,6 +2126,7 @@ AddOutputFilter chunkFilter
 				<Item Name="Validate Semaphore Size.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/semaphor.llb/Validate Semaphore Size.vi"/>
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
 			</Item>
+			<Item Name="lvanlys.dll" Type="Document" URL="/&lt;resource&gt;/lvanlys.dll"/>
 			<Item Name="NationalInstruments.VeriStand.SystemStorage" Type="Document" URL="NationalInstruments.VeriStand.SystemStorage">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
