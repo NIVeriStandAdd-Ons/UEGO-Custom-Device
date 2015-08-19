@@ -23,6 +23,7 @@
 			<Item Name="Write VS output FIFO.vi" Type="VI" URL="../Write VS output FIFO.vi"/>
 		</Item>
 		<Item Name="Shut Down" Type="Folder"/>
+		<Item Name="RT Cal procedure.vi" Type="VI" URL="../RT Cal procedure.vi"/>
 	</Item>
 	<Item Name="Types" Type="Folder">
 		<Item Name="UEGO CD state.ctl" Type="VI" URL="../UEGO CD state.ctl"/>
