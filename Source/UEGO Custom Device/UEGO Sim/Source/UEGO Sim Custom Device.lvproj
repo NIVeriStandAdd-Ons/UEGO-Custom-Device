@@ -1947,6 +1947,9 @@ AddOutputFilter chunkFilter
 					<Item Name="niFPGA BW CU Order 2 (32-bit).vi" Type="VI" URL="/&lt;vilib&gt;/rvi/Analysis/measure/butterworth/templates/niFPGA BW CU Order 2 (32-bit).vi"/>
 					<Item Name="niFPGA I32xI32 MAC - FXP.vi" Type="VI" URL="/&lt;vilib&gt;/rvi/Analysis/utilities/niFPGA I32xI32 MAC - FXP.vi"/>
 				</Item>
+				<Item Name="O2 Sensor Simulation.vi" Type="VI" URL="../Engine/FPGA/O2 Sensor Simulation.vi"/>
+				<Item Name="UEGO sim component.vi" Type="VI" URL="../Engine/FPGA/UEGO sim component.vi"/>
+				<Item Name="UEGO Sim Shared.lvlib" Type="Library" URL="../Shared/UEGO Sim Shared.lvlib"/>
 			</Item>
 			<Item Name="Build Specifications" Type="Build">
 				<Item Name="example fpga code" Type="{F4C5E96F-7410-48A5-BB87-3559BC9B167F}">
