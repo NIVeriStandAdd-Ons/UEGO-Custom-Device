@@ -5,7 +5,7 @@
     <eng>UEGO Sim</eng>
     <loc>UEGO Sim</loc>
   </AddMenu>
-  <Version>0.1.0</Version>
+  <Version>1.0.0</Version>
   <Type>Asynchronous</Type>
   <MaxOccurrence>-1</MaxOccurrence>
   <MainPageGUID>ff7a9f46-4f61-4499-baf7-cd41c676dfd4</MainPageGUID>
