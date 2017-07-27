@@ -13,7 +13,7 @@ LV 2014
 
 ### Built Availability ###
 
-No publicly built version is available.  Contact sn NI partner or systems engineering for this service.
+No publicly built version is available.  Contact NI or an NI Alliance partner for this service.  You are of course welcome to build it yourself!
 
 ### Quality, Limitations ###
 
